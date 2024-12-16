@@ -1,5 +1,6 @@
 package com.max.sir.omdb
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -8,10 +9,14 @@ import androidx.room.TypeConverters
 @TypeConverters(MovieEntityTypeConverter::class)
 data class MovieEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val title: String,
-    val year: String,
-    val poster: String,
+    val id:Int = 0,
+    @ColumnInfo("title")
+    val title: String?,
+    @ColumnInfo("year")
+    val year: String?,
+    @ColumnInfo("poster")
+    val poster: String?,
+    @ColumnInfo("isFavorite")
     val isFavorite: Boolean = false
 ) {
     companion object {
@@ -23,9 +28,9 @@ data class MovieEntity(
         )
 
         fun toMovie(entity: MovieEntity): Movie = Movie(
-            title = entity.title,
-            year = entity.year,
-            poster = entity.poster,
+            title = entity.title?:"",
+            year = entity.year?:"",
+            poster = entity.poster?:"",
             isFavorite = entity.isFavorite
         )
     }

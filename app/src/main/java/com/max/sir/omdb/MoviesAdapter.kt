@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.max.sir.omdb.databinding.ItemMovieBinding
 
 class MoviesAdapter(
+    private val onItemClicked:(id:String) -> Unit,
     private val onFavoriteClick: (Movie) -> Unit
 ) : ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(DiffCallback) {
 
@@ -23,7 +24,7 @@ class MoviesAdapter(
         holder.bind(getItem(position), onFavoriteClick)
     }
 
-    class MovieViewHolder(private val binding: ItemMovieBinding) :
+    inner class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie, onFavoriteClick: (Movie) -> Unit) {
@@ -31,9 +32,13 @@ class MoviesAdapter(
             binding.year.text = movie.year
             Glide.with(binding.poster).load(movie.poster).into(binding.poster)
 
-            binding.favoriteButton.setOnClickListener {
-                onFavoriteClick(movie)
+            binding.root.setOnClickListener {
+                onItemClicked(movie.id)
             }
+
+//            binding.favoriteButton.setOnClickListener {
+//                onFavoriteClick(movie)
+//            }
         }
     }
 

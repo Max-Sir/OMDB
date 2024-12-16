@@ -10,32 +10,31 @@ class MovieRepository @Inject constructor(
     private val api: MovieApiService,
     private val dao: MovieDao
 ) {
-    suspend fun searchMovies(apiKey: String, query: String): List<Movie> {
+    suspend fun searchMovies(query: String): List<Movie> {
         return withContext(Dispatchers.IO) {
-            val response = api.searchMovies(apiKey, query)
+            val response = api.searchMovies(query)
             if (response.isSuccessful) {
                 val movies =
-                    response.body()?.Search?.map { MovieEntity.fromMovie(it) } ?: emptyList()
-                //dao.insertMovies(movies)
+                    response.body()?.search?.map { MovieEntity.fromMovie(it) } ?: emptyList()
                 Log.i("mov", "$movies")
+                if(movies.isNotEmpty()) {dao.insertMovies(movies)}
                 movies.map { MovieEntity.toMovie(it) }
             } else {
-                //dao.searchMovies("%$query%").map { MovieEntity.toMovie(it) }
                 Log.i("mov", "nothing")
-                emptyList()
+                dao.searchMovies("%$query%").map { MovieEntity.toMovie(it) }
             }
         }
     }
 
     suspend fun getFavorites(): List<Movie> = withContext(Dispatchers.IO) {
-        //dao.getFavorites().map { MovieEntity.toMovie(it) }
+        dao.getFavorites().map { MovieEntity.toMovie(it) }
         emptyList()
     }
 
     suspend fun toggleFavorite(movie: Movie) {
         withContext(Dispatchers.IO) {
             val entity = MovieEntity.fromMovie(movie).copy(isFavorite = !movie.isFavorite)
-            //dao.updateMovie(entity)
+            dao.updateMovie(entity)
         }
     }
 }

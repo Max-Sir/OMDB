@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
+    private val navPort: Navigator,
 ) : ViewModel() {
 
     private val _movies = MutableLiveData<List<Movie>>()
@@ -19,7 +20,7 @@ class SearchViewModel @Inject constructor(
 
     fun searchMovies(query: String) {
         viewModelScope.launch {
-            _movies.value = repository.searchMovies("e1e09adf", query)
+            _movies.value = repository.searchMovies(query)
             Log.i("mov", "$query, ${movies.value}")
         }
     }
@@ -28,5 +29,9 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             repository.toggleFavorite(movie)
         }
+    }
+
+    fun openDetails() {
+        navPort.navigateTo(R.id.detailsFragment)
     }
 }
