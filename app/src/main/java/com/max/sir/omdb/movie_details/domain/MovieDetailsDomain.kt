@@ -7,7 +7,7 @@ data class MovieDetailsDomain(
     val poster: String,
     val released: String,
     val title: String,
-    val year: String
+    val year: String,
 ){
 
     fun mapToMovieDetailsUi(): MovieDetailsItemUi =
@@ -16,7 +16,7 @@ data class MovieDetailsDomain(
             poster = poster?:"",
             released = released?:"",
             title = title?:"",
-            year = year?:""
+            year = year?:"",
         )
 
 }

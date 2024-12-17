@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:textSize="24sp"
+            android:imeOptions="actionSearch"
             android:hint="@string/search_movies"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>

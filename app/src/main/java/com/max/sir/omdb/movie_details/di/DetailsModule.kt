@@ -1,6 +1,7 @@
 package com.max.sir.omdb.movie_details.di
 
 import com.max.sir.omdb.core.AppDatabase
+import com.max.sir.omdb.movie_details.data.cache.MovieDetailsDao
 import com.max.sir.omdb.movie_details.data.cloud.MovieDetailsService
 import com.max.sir.omdb.search.data.cache.MovieDao
 import com.max.sir.omdb.search.data.cloud.MovieApiService
@@ -23,4 +24,8 @@ class DetailsModule {
         return retrofit.create(MovieDetailsService::class.java)
     }
 
+    @Provides
+    fun provideMovieDetailsDao(database: AppDatabase): MovieDetailsDao = database.movieDetailsDao()
+
 }
+

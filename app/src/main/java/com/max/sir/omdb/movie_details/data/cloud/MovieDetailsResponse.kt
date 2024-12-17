@@ -2,10 +2,12 @@ package com.max.sir.omdb.movie_details.data.cloud
 
 
 import com.google.gson.annotations.SerializedName
+import com.max.sir.omdb.movie_details.data.cache.MovieDetailEntity
 import com.max.sir.omdb.movie_details.domain.MovieDetailsDomain
-import com.max.sir.omdb.movie_details.presentation.MovieDetailsItemUi
 
 data class MovieDetailsResponse(
+    @SerializedName("imdbID")
+    val id: String? = null,
     @SerializedName("Plot")
     val plot: String? = null,
     @SerializedName("Poster")
@@ -25,6 +27,17 @@ data class MovieDetailsResponse(
                 title = title?:"",
                 year = year?:""
             )
+
+    fun mapToMovieDetail(): MovieDetailEntity {
+        return MovieDetailEntity(
+            id = id?:"",
+            plot = plot?:"",
+            poster = poster?:"",
+            released = released?:"",
+            title = title?:"",
+            year = year?:"",
+        )
+    }
 
 
 }
