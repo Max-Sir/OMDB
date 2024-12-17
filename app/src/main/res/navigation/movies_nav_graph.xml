@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.max.sir.omdb.SearchFragment"
+        android:name="com.max.sir.omdb.search.presentation.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search">
         <action
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.max.sir.omdb.DetailsFragment"
+        android:name="com.max.sir.omdb.movie_details.presentation.DetailsFragment"
         android:label="Details"
         tools:layout="@layout/fragment_details" />
 

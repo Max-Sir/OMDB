@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">OMDB</string>
     <string name="search_movies">Search movies</string>
+    <string name="failed_responce">failed_responce</string>
+    <string name="something_went_wrong">something_went_wrong </string>
+    <string name="add_to_favorites">Add to Favorites</string>
 </resources>
